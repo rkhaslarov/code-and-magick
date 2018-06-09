@@ -21,6 +21,9 @@ var HISTOGRAM_HEIGHT = 150;
 var HISTOGRAM_INITIAL_X = CLOUD_INITIAL_X + BAR_GUTTER;
 var HISTOGRAM_INITIAL_Y = CLOUD_HEIGHT - CLOUD_INITIAL_Y - HISTOGRAM_HEIGHT - TITLE_GAP;
 
+var PLAYER_NAME = 'Вы';
+var PLAYER_COLOR = '#F00';
+
 var getMaxItem = function (list) {
 
   var max = list[0];
@@ -51,7 +54,7 @@ var renderTitle = function (ctx, text, xGap, yGap) {
 };
 
 var getBarColor = function (name) {
-  return name === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
+  return name === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
 };
 
 var getBarX = function (num) {
@@ -81,7 +84,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = getBarColor(name);
     ctx.fillRect(getBarX(i), getBarY(score, step), BAR_WIDTH, barHeight);
 
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = TITLE_COLOR;
     ctx.fillText(score, getBarX(i), getBarY(score, step) - TITLE_GAP);
     ctx.fillText(name, getBarX(i), getBarY(score, step) + barHeight + TITLE_GAP / 2);
   }
