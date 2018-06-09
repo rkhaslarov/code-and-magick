@@ -61,8 +61,8 @@ var getBarX = function (num) {
   return HISTOGRAM_INITIAL_X + num * (BAR_WIDTH + BAR_GUTTER);
 };
 
-var getBarY = function (score, step) {
-  return HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - score * step);
+var getBarY = function (barHeight) {
+  return HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
 };
 
 window.renderStatistics = function (ctx, names, times) {
@@ -82,10 +82,10 @@ window.renderStatistics = function (ctx, names, times) {
     var barHeight = score * step;
 
     ctx.fillStyle = getBarColor(name);
-    ctx.fillRect(getBarX(i), getBarY(score, step), BAR_WIDTH, barHeight);
+    ctx.fillRect(getBarX(i), getBarY(barHeight), BAR_WIDTH, barHeight);
 
     ctx.fillStyle = TITLE_COLOR;
-    ctx.fillText(score, getBarX(i), getBarY(score, step) - TITLE_GAP);
-    ctx.fillText(name, getBarX(i), getBarY(score, step) + barHeight + TITLE_GAP / 2);
+    ctx.fillText(score, getBarX(i), getBarY(barHeight) - TITLE_GAP);
+    ctx.fillText(name, getBarX(i), getBarY(barHeight) + barHeight + TITLE_GAP / 2);
   }
 };
