@@ -32,10 +32,9 @@ var getMaxItem = function (list) {
   }
 
   return max;
-  
 };
 
-var getRandomInRange = function (min, max) {
+var getRandomValue = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
@@ -52,7 +51,7 @@ var renderTitle = function (ctx, text, xGap, yGap) {
 };
 
 var getBarColor = function (name) {
-  return name === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + getRandomInRange(1, 100) + '%, 45%)';
+  return name === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
 };
 
 var getBarX = function (num) {
@@ -85,7 +84,5 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = '#000';
     ctx.fillText(score, getBarX(i), getBarY(score, step) - TITLE_GAP);
     ctx.fillText(name, getBarX(i), getBarY(score, step) + barHeight + TITLE_GAP / 2);
-
   }
-
 };
