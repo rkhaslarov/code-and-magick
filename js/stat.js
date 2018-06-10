@@ -53,18 +53,6 @@ var renderTitle = function (ctx, text, xGap, yGap) {
   ctx.fillText(text, CLOUD_INITIAL_X + xGap, CLOUD_INITIAL_Y + yGap);
 };
 
-var getBarColor = function (name) {
-  return name === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
-};
-
-var getBarX = function (num) {
-  return HISTOGRAM_INITIAL_X + num * (BAR_WIDTH + BAR_GUTTER);
-};
-
-var getBarY = function (barHeight) {
-  return HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
-};
-
 window.renderStatistics = function (ctx, names, times) {
 
   renderCloud(ctx, CLOUD_INITIAL_X + SHADOW_SIZE, CLOUD_INITIAL_Y + SHADOW_SIZE, SHADOW_COLOR);
@@ -80,12 +68,14 @@ window.renderStatistics = function (ctx, names, times) {
     var score = Math.ceil(times[i]);
     var name = names[i];
     var barHeight = score * step;
+    var barX = HISTOGRAM_INITIAL_X + i * (BAR_WIDTH + BAR_GUTTER);
+    var barY = HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
 
-    ctx.fillStyle = getBarColor(name);
-    ctx.fillRect(getBarX(i), getBarY(barHeight), BAR_WIDTH, barHeight);
+    ctx.fillStyle = name === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
+    ctx.fillRect(barX, barY, BAR_WIDTH, barHeight);
 
     ctx.fillStyle = TITLE_COLOR;
-    ctx.fillText(score, getBarX(i), getBarY(barHeight) - TITLE_GAP);
-    ctx.fillText(name, getBarX(i), getBarY(barHeight) + barHeight + TITLE_GAP / 2);
+    ctx.fillText(score, barX, barY - TITLE_GAP);
+    ctx.fillText(name, barX, barY + barHeight + TITLE_GAP / 2);
   }
 };
