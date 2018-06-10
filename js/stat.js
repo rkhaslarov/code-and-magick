@@ -53,6 +53,20 @@ var renderTitle = function (ctx, text, xGap, yGap) {
   ctx.fillText(text, CLOUD_INITIAL_X + xGap, CLOUD_INITIAL_Y + yGap);
 };
 
+var renderBar = function (ctx, name, score, step, index) {
+
+  var barHeight = score * step;
+  var barX = HISTOGRAM_INITIAL_X + index * (BAR_WIDTH + BAR_GUTTER);
+  var barY = HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
+
+  ctx.fillStyle = name === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
+  ctx.fillRect(barX, barY, BAR_WIDTH, barHeight);
+
+  ctx.fillStyle = TITLE_COLOR;
+  ctx.fillText(score, barX, barY - TITLE_GAP);
+  ctx.fillText(name, barX, barY + barHeight + TITLE_GAP / 2);
+};
+
 window.renderStatistics = function (ctx, names, times) {
 
   renderCloud(ctx, CLOUD_INITIAL_X + SHADOW_SIZE, CLOUD_INITIAL_Y + SHADOW_SIZE, SHADOW_COLOR);
@@ -64,18 +78,6 @@ window.renderStatistics = function (ctx, names, times) {
   var step = (HISTOGRAM_HEIGHT - TITLE_GAP) / getMaxItem(times);
 
   for (var i = 0; i < times.length; i++) {
-
-    var score = Math.ceil(times[i]);
-    var name = names[i];
-    var barHeight = score * step;
-    var barX = HISTOGRAM_INITIAL_X + i * (BAR_WIDTH + BAR_GUTTER);
-    var barY = HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
-
-    ctx.fillStyle = name === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
-    ctx.fillRect(barX, barY, BAR_WIDTH, barHeight);
-
-    ctx.fillStyle = TITLE_COLOR;
-    ctx.fillText(score, barX, barY - TITLE_GAP);
-    ctx.fillText(name, barX, barY + barHeight + TITLE_GAP / 2);
+    renderBar(ctx, names[i], Math.ceil(times[i]), step, i);
   }
 };
