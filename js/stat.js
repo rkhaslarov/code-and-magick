@@ -58,7 +58,6 @@ var renderTitle = function (ctx, text, xGap, yGap) {
 };
 
 var renderBar = function (ctx, name, score, step, index) {
-
   var barHeight = score * step;
   var barX = HISTOGRAM_INITIAL_X + index * (BAR_WIDTH + BAR_GUTTER);
   var barY = HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
@@ -72,7 +71,6 @@ var renderBar = function (ctx, name, score, step, index) {
 };
 
 window.renderStatistics = function (ctx, names, times) {
-
   renderCloud(ctx, CLOUD_INITIAL_X + SHADOW_SIZE, CLOUD_INITIAL_Y + SHADOW_SIZE, SHADOW_COLOR);
   renderCloud(ctx, CLOUD_INITIAL_X, CLOUD_INITIAL_Y, CLOUD_COLOR);
 
