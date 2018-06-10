@@ -1,5 +1,9 @@
 'use strict';
 
+/*
+ * Массивы, циклические алгоритмы, объекты, свойства и методы, DOM, canvas, отладчик кода.
+*/
+
 var CLOUD_COLOR = '#fff';
 var CLOUD_INITIAL_X = 100;
 var CLOUD_INITIAL_Y = 10;
