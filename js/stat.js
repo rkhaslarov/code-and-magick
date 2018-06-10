@@ -1,7 +1,7 @@
 'use strict';
 
 /*
- * Массивы, циклические алгоритмы, объекты, свойства и методы, DOM, canvas, отладчик кода.
+ * Arrays, loops, objects, properties and methods, DOM, canvas, debugger.
 */
 
 var CLOUD_COLOR = '#fff';
@@ -28,36 +28,35 @@ var HISTOGRAM_INITIAL_Y = CLOUD_HEIGHT - CLOUD_INITIAL_Y - HISTOGRAM_HEIGHT - TI
 var PLAYER_NAME = 'Вы';
 var PLAYER_COLOR = '#F00';
 
-var getMaxItem = function (list) {
+function getMaxItem(list) {
+  var max = 0;
 
-  var max = list[0];
-
-  for (var i = 1; i < list.length; i++) {
+  for (var i = 0; i < list.length; i++) {
     if (list[i] > max) {
       max = list[i];
     }
   }
 
   return max;
-};
+}
 
-var getRandomValue = function (min, max) {
+function getRandomValue(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+}
 
-var renderCloud = function (ctx, x, y, color) {
+function renderCloud(ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
-};
+}
 
-var renderTitle = function (ctx, text, xGap, yGap) {
+function renderTitle(ctx, text, xGap, yGap) {
   ctx.fillStyle = TITLE_COLOR;
   ctx.font = TITLE_FONT;
   ctx.textBaseline = TITLE_BASELINE;
   ctx.fillText(text, CLOUD_INITIAL_X + xGap, CLOUD_INITIAL_Y + yGap);
-};
+}
 
-var renderBar = function (ctx, name, score, step, index) {
+function renderBar(ctx, name, score, step, index) {
   var barHeight = score * step;
   var barX = HISTOGRAM_INITIAL_X + index * (BAR_WIDTH + BAR_GUTTER);
   var barY = HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
@@ -68,7 +67,7 @@ var renderBar = function (ctx, name, score, step, index) {
   ctx.fillStyle = TITLE_COLOR;
   ctx.fillText(score, barX, barY - TITLE_GAP);
   ctx.fillText(name, barX, barY + barHeight + TITLE_GAP / 2);
-};
+}
 
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_INITIAL_X + SHADOW_SIZE, CLOUD_INITIAL_Y + SHADOW_SIZE, SHADOW_COLOR);
