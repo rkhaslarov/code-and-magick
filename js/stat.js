@@ -29,6 +29,7 @@ var PLAYER_NAME = 'Вы';
 var PLAYER_COLOR = '#F00';
 
 function getMaxItem(list) {
+
   var max = 0;
 
   for (var i = 0; i < list.length; i++) {
@@ -57,6 +58,7 @@ function renderTitle(ctx, text, xGap, yGap) {
 }
 
 function renderBar(ctx, name, score, step, index) {
+
   var barHeight = score * step;
   var barX = HISTOGRAM_INITIAL_X + index * (BAR_WIDTH + BAR_GUTTER);
   var barY = HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
@@ -70,6 +72,7 @@ function renderBar(ctx, name, score, step, index) {
 }
 
 window.renderStatistics = function (ctx, names, times) {
+
   renderCloud(ctx, CLOUD_INITIAL_X + SHADOW_SIZE, CLOUD_INITIAL_Y + SHADOW_SIZE, SHADOW_COLOR);
   renderCloud(ctx, CLOUD_INITIAL_X, CLOUD_INITIAL_Y, CLOUD_COLOR);
 
