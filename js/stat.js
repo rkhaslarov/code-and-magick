@@ -28,7 +28,7 @@ var HISTOGRAM_INITIAL_Y = CLOUD_HEIGHT - CLOUD_INITIAL_Y - HISTOGRAM_HEIGHT - TI
 var PLAYER_NAME = 'Вы';
 var PLAYER_COLOR = '#F00';
 
-function getMaxItem(list) {
+function getMaxItemFromArray(list) {
 
   var max = 0;
 
@@ -41,7 +41,7 @@ function getMaxItem(list) {
   return max;
 }
 
-function getRandomValue(min, max) {
+function getRandomNumberInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -63,7 +63,7 @@ function renderBar(ctx, name, score, step, index) {
   var barX = HISTOGRAM_INITIAL_X + index * (BAR_WIDTH + BAR_GUTTER);
   var barY = HISTOGRAM_INITIAL_Y + (HISTOGRAM_HEIGHT - barHeight);
 
-  ctx.fillStyle = name === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, ' + getRandomValue(1, 100) + '%, 45%)';
+  ctx.fillStyle = name === PLAYER_NAME ? PLAYER_COLOR : 'hsl(240, ' + getRandomNumberInRange(1, 100) + '%, 45%)';
   ctx.fillRect(barX, barY, BAR_WIDTH, barHeight);
 
   ctx.fillStyle = TITLE_COLOR;
@@ -79,7 +79,7 @@ window.renderStatistics = function (ctx, names, times) {
   renderTitle(ctx, 'Ура вы победили!', TITLE_GAP, TITLE_GAP);
   renderTitle(ctx, 'Список результатов:', TITLE_GAP, TITLE_GAP * 2);
 
-  var step = (HISTOGRAM_HEIGHT - TITLE_GAP) / getMaxItem(times);
+  var step = (HISTOGRAM_HEIGHT - TITLE_GAP) / getMaxItemFromArray(times);
 
   for (var i = 0; i < times.length; i++) {
     renderBar(ctx, names[i], Math.ceil(times[i]), step, i);
