@@ -16,25 +16,44 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
+/**
+ * calculates and returns random value from given array
+ *
+ * @param  {Array} list
+ * @return {Any}
+ */
 function getRandomValueFromArray(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-function generateWizardInfo() {
+/**
+ * generates all wizards information by amount
+ *
+ * @param  {Number} amount - amount of the entities which should be generated
+ * @return {Array}
+ */
+function generateWizardsInfo(amount) {
 
-  var name = getRandomValueFromArray(WIZARD_NAMES);
-  var surname = getRandomValueFromArray(WIZARD_SURNAMES);
-  var coatColor = getRandomValueFromArray(WIZARD_COAT_COLORS);
-  var eyesColor = getRandomValueFromArray(WIZARD_EYES_COLORS);
+  var wizards = [];
 
-  return {
-    name: name + ' ' + surname,
-    coatColor: coatColor,
-    eyesColor: eyesColor
-  };
+  for (var i = 0; i < amount; i++) {
+    wizards.push({
+      name: getRandomValueFromArray(WIZARD_NAMES) + ' ' + getRandomValueFromArray(WIZARD_SURNAMES),
+      coatColor: getRandomValueFromArray(WIZARD_COAT_COLORS),
+      eyesColor: getRandomValueFromArray(WIZARD_EYES_COLORS)
+    });
+  }
+
+  return wizards;
 }
 
-function createWizard(wizard) {
+/**
+ * clones essential wizard template and modifies it
+ *
+ * @param  {Object} wizard - wizard information object
+ * @return {Object}
+ */
+function renderWizard(wizard) {
 
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
@@ -45,18 +64,24 @@ function createWizard(wizard) {
   return wizardElement;
 }
 
-function renderWizards() {
+/**
+ * renders wizards and returns dom fragment
+ *
+ * @return {Object}
+ */
+function renderAllWizards() {
 
   var fragment = document.createDocumentFragment();
+  var wizards = generateWizardsInfo(MAX_WIZARDS_NUMBER);
 
-  for (var i = 0; i < MAX_WIZARDS_NUMBER; i++) {
-    fragment.appendChild(createWizard(generateWizardInfo()));
-  }
+  wizards.forEach(function (wizard) {
+    fragment.appendChild(renderWizard(wizard));
+  });
 
   return fragment;
 }
 
-similarListElement.appendChild(renderWizards());
+similarListElement.appendChild(renderAllWizards());
 
 userDialog.classList.remove('hidden');
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
