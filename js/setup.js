@@ -15,6 +15,7 @@ var ESC_KEY_CODE = 27;
 var ENTER_KEY_CODE = 13;
 
 var setup = document.querySelector('.setup');
+var setupSimilar = setup.querySelector('.setup-similar');
 var similarListElement = setup.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
@@ -64,6 +65,7 @@ function generateWizardsInfo(amount) {
  * @param  {Object} wizard - wizard information object
  * @return {Node}
  */
+
 function renderWizard(wizard) {
 
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -94,52 +96,81 @@ function renderAllWizards() {
 
 similarListElement.appendChild(renderAllWizards());
 
-setup.classList.remove('hidden');
-setup.querySelector('.setup-similar').classList.remove('hidden');
+/*
+ * Events, Dom Events, Delegation.
+*/
 
-var openPopup = function () {
+/**
+ * opens setup popup
+ */
+function openPopup() {
   setup.classList.remove('hidden');
+  setupSimilar.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
   setupUserName.addEventListener('focus', onSetupUserNameFocus);
   setupUserName.addEventListener('blur', onSetupUserNameBlur);
-};
+}
 
-var closePopup = function () {
+/**
+ * closes setup popup
+ */
+function closePopup() {
   setup.classList.add('hidden');
+  setupSimilar.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
-};
+}
 
-var onPopupEscPress = function (evt) {
+/**
+ * closes setup popup by pressing ESC button
+ *
+ * @param {Object} evt - event object
+ */
+function onPopupEscPress(evt) {
   if (evt.keyCode === ESC_KEY_CODE) {
     closePopup();
   }
-};
+}
 
-var onSetupUserNameFocus = function () {
+/**
+ * removes event listener for closing popup via ESC from document
+ */
+function onSetupUserNameFocus() {
   document.removeEventListener('keydown', onPopupEscPress);
-};
+}
 
-var onSetupUserNameBlur = function () {
+/**
+ * adds event listener for closing popup via ESC from document
+ */
+function onSetupUserNameBlur() {
   document.addEventListener('keydown', onPopupEscPress);
-};
+}
 
-var onSetupWizardCoatClick = function () {
+/**
+ * changes wizard's coat color to random one
+ */
+function onSetupWizardCoatClick() {
   var coatColor = getRandomValueFromArray(WIZARD_COAT_COLORS);
   setupWizardCoat.style.fill = coatColor;
   setup.querySelector('input[name="coat-color"]').value = coatColor;
-};
+}
 
-var onSetupWizardEyesClick = function () {
+/**
+ * changes wizard's eye color to random one
+ */
+function onSetupWizardEyesClick() {
   var eyeColor = getRandomValueFromArray(WIZARD_EYES_COLORS);
   setupWizardEyes.style.fill = eyeColor;
   setup.querySelector('input[name="eyes-color"]').value = eyeColor;
-};
+}
 
-var onSetupFireballClick = function () {
+/**
+ * changes wizard's fireball color to random one
+ */
+function onSetupFireballClick() {
   var fireballColor = getRandomValueFromArray(WIZARD_FIREBALL_COLORS);
   setupFireball.style.backgroundColor = fireballColor;
   setupFireball.querySelector('input[name="fireball-color"]').value = fireballColor;
-};
+}
 
 setupOpen.addEventListener('click', function () {
   openPopup();
