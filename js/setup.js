@@ -28,6 +28,8 @@ var setupWizardCoat = setup.querySelector('.setup-wizard .wizard-coat');
 var setupWizardEyes = setup.querySelector('.setup-wizard .wizard-eyes');
 var setupFireball = setup.querySelector('.setup-fireball-wrap');
 
+var setupPosition = {};
+
 /**
  * calculates and returns random value from given array
  *
@@ -105,6 +107,8 @@ similarListElement.appendChild(renderAllWizards());
  */
 function openPopup() {
   setup.classList.remove('hidden');
+  setupPosition.left = setup.offsetLeft + 'px';
+  setupPosition.top = setup.offsetTop + 'px';
   setupSimilar.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
   setupUserName.addEventListener('focus', onSetupUserNameFocus);
@@ -116,6 +120,8 @@ function openPopup() {
  */
 function closePopup() {
   setup.classList.add('hidden');
+  setup.style.left = setupPosition.left;
+  setup.style.top = setupPosition.top;
   setupSimilar.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 }
