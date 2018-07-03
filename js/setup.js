@@ -119,9 +119,9 @@ function openPopup() {
  * closes setup popup
  */
 function closePopup() {
+  setup.classList.add('hidden');
   setup.style.left = setupPosition.left;
   setup.style.top = setupPosition.top;
-  setup.classList.add('hidden');
   setupSimilar.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 }
